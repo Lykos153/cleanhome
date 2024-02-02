@@ -62,5 +62,7 @@ def findunmanaged [path: string = "."] {
 }
 
 def main [path: string = "."] {
-  findunmanaged $path
+  if (isgitrepo $path) {} else {
+    findunmanaged $path
+  }
 }
