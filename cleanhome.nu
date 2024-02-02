@@ -1,3 +1,5 @@
+#!/usr/bin/env nu
+
 def isdir [path: string = "."] {
   ($path | path type) == "dir"
 }
@@ -57,4 +59,8 @@ export def findunmanaged [path: string = "."] {
       }
     })
   }
+}
+
+def main [path: string = "."] {
+  findunmanaged $path
 }
