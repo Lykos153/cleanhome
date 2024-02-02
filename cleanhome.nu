@@ -16,7 +16,7 @@ def containsgitrepo [path: string = "."] {
   ls $path | any {|in| isgitrepo $in.name}
 }
 
-export def containsonlygitrepos [path: string = "."] {
+def containsonlygitrepos [path: string = "."] {
   ls $path | reduce --fold false {|it,acc|
     if (all {|it| isgitrepo $it.name}) {
       true
@@ -47,7 +47,7 @@ def filterclean [] {
   if ($in != null and (($in | length) > 0) and ($in | all {|it| not (isgitrepo $it.name) })) {{name: (dirname $in.0.name), state: "dir"}} else {$in}
 }
 
-export def findunmanaged [path: string = "."] {
+def findunmanaged [path: string = "."] {
   ls $path | reduce --fold [] {|it, acc|
     let $state = cleanstate $it.name
     $acc | append (match $state {
